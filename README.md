@@ -330,3 +330,4 @@ For support and questions:
 ---
 
 **Built with ❤️ using Java 21, Spring Boot 3.x, and layered architecture principles**
+
