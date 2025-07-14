@@ -1,0 +1,55 @@
+# Git files
+.git
+.gitignore
+.github/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build directories
+target/
+build/
+out/
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+
+# Test files
+coverage/
+*.coverage
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Dev container
+.devcontainer/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Documentation
+README.md
+*.md
+docs/
