@@ -1,0 +1,658 @@
+{
+  "info": {
+    "name": "User Service API",
+    "description": "Complete API collection for User Service microservice with multi-tenant RBAC",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1/users",
+      "type": "string"
+    },
+    {
+      "key": "tenantId",
+      "value": "tenant1",
+      "type": "string"
+    },
+    {
+      "key": "domainId",
+      "value": "domain1",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "roleId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "permissionId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"john.doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            },
+            "description": "Creates a new user in the system"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}"]
+            },
+            "description": "Retrieves user information by user ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by Username",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/username/john.doe",
+              "host": ["{{baseUrl}}"],
+              "path": ["username", "john.doe"]
+            },
+            "description": "Retrieves user information by username"
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.updated@example.com\",\n  \"firstName\": \"Jonathan\",\n  \"lastName\": \"Doe\",\n  \"isActive\": true,\n  \"isEmailVerified\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}"]
+            },
+            "description": "Updates user information"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}"]
+            },
+            "description": "Deletes a user from the system"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            },
+            "description": "Retrieves all users in the tenant and domain"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/search?q=john",
+              "host": ["{{baseUrl}}"],
+              "path": ["search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "john"
+                }
+              ]
+            },
+            "description": "Searches for users by term"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Status Management",
+      "item": [
+        {
+          "name": "Activate User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/activate",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "activate"]
+            },
+            "description": "Activates a user account"
+          },
+          "response": []
+        },
+        {
+          "name": "Deactivate User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/deactivate",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "deactivate"]
+            },
+            "description": "Deactivates a user account"
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/verify-email",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "verify-email"]
+            },
+            "description": "Verifies a user's email address"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Permission Management",
+      "item": [
+        {
+          "name": "Get User Permissions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/permissions",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "permissions"]
+            },
+            "description": "Retrieves all permissions for a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Cache User Permissions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/permissions/cache",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "permissions", "cache"]
+            },
+            "description": "Caches user permissions in Redis"
+          },
+          "response": []
+        },
+        {
+          "name": "Evict User Permissions Cache",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/permissions/cache",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "permissions", "cache"]
+            },
+            "description": "Removes cached permissions from Redis"
+          },
+          "response": []
+        },
+        {
+          "name": "Check User Permission",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/permissions/check?permission=user:read",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "permissions", "check"],
+              "query": [
+                {
+                  "key": "permission",
+                  "value": "user:read"
+                }
+              ]
+            },
+            "description": "Checks if a user has a specific permission"
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Permission to User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/permissions/{{permissionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "permissions", "{{permissionId}}"]
+            },
+            "description": "Assigns a specific permission to a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Permission from User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/permissions/{{permissionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "permissions", "{{permissionId}}"]
+            },
+            "description": "Removes a specific permission from a user"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Role Management",
+      "item": [
+        {
+          "name": "Get User Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/roles",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "roles"]
+            },
+            "description": "Retrieves all roles assigned to a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Role to User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/roles/{{roleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "roles", "{{roleId}}"]
+            },
+            "description": "Assigns a role to a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Role from User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/roles/{{roleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "roles", "{{roleId}}"]
+            },
+            "description": "Removes a role from a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Check User Role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/{{userId}}/roles/check?role=USER",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{userId}}", "roles", "check"],
+              "query": [
+                {
+                  "key": "role",
+                  "value": "USER"
+                }
+              ]
+            },
+            "description": "Checks if a user has a specific role"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Validation",
+      "item": [
+        {
+          "name": "Check Username Availability",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/username/john.doe/available",
+              "host": ["{{baseUrl}}"],
+              "path": ["username", "john.doe", "available"]
+            },
+            "description": "Checks if a username is available"
+          },
+          "response": []
+        },
+        {
+          "name": "Check Email Availability",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Tenant-ID",
+                "value": "{{tenantId}}"
+              },
+              {
+                "key": "X-Domain-ID",
+                "value": "{{domainId}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/email/john.doe@example.com/available",
+              "host": ["{{baseUrl}}"],
+              "path": ["email", "john.doe@example.com", "available"]
+            },
+            "description": "Checks if an email is available"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Application Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/actuator/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["actuator", "health"]
+            },
+            "description": "Checks application health status"
+          },
+          "response": []
+        },
+        {
+          "name": "Application Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/actuator/info",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["actuator", "info"]
+            },
+            "description": "Gets application information"
+          },
+          "response": []
+        },
+        {
+          "name": "Application Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/actuator/metrics",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["actuator", "metrics"]
+            },
+            "description": "Gets application metrics"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

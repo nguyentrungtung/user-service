@@ -7,12 +7,12 @@ service/com/service/userservice/entity/User$UserBuilder.class
 service/com/service/userservice/exception/UserNotFoundException.class
 service/com/service/userservice/dto/RoleDto.class
 service/com/service/userservice/entity/Role.class
-service/com/service/userservice/exception/GlobalExceptionHandler$ValidationErrorResponse.class
 service/com/service/userservice/entity/Permission$PermissionBuilder.class
+service/com/service/userservice/exception/GlobalExceptionHandler$ValidationErrorResponse.class
 service/com/service/userservice/dto/UpdateUserRequest$UpdateUserRequestBuilder.class
 service/com/service/userservice/repository/RoleRepository.class
-service/com/service/userservice/utils/TenantContext.class
 service/com/service/userservice/config/SecurityConfig.class
+service/com/service/userservice/utils/TenantContext.class
 service/com/service/userservice/dto/CreateUserRequest.class
 service/com/service/userservice/entity/User.class
 service/com/service/userservice/repository/UserRepository.class
@@ -29,10 +29,10 @@ service/com/service/userservice/UserServiceApplication.class
 service/com/service/userservice/exception/UserAlreadyExistsException.class
 service/com/service/userservice/service/impl/UserServiceImpl.class
 service/com/service/userservice/service/UserService.class
-service/com/service/userservice/exception/GlobalExceptionHandler$ErrorResponse.class
 service/com/service/userservice/entity/Role$RoleBuilder.class
-service/com/service/userservice/dto/UserDto.class
+service/com/service/userservice/exception/GlobalExceptionHandler$ErrorResponse.class
 service/com/service/userservice/dto/UpdateUserRequest.class
+service/com/service/userservice/dto/UserDto.class
 service/com/service/userservice/dto/UserPermissionsDto$UserPermissionsDtoBuilder.class
 service/com/service/userservice/repository/PermissionRepository.class
 service/com/service/userservice/dto/PermissionDto$PermissionDtoBuilder.class

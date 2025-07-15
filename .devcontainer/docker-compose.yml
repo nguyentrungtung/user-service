@@ -1,5 +1,3 @@
-version: '3.8'
-
 volumes:
   postgres-data:
   redis-data:
@@ -20,7 +18,7 @@ services:
         REDIS_HOSTNAME: redis
 
     volumes:
-      - ../..:/workspaces:cached
+      - ..:/workspaces/user-service:cached
       
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
@@ -74,24 +72,3 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
     # Access pgAdmin at http://localhost:80 with admin@admin.com / admin
 
-  user-service:
-    container_name: user-service
-    build:
-      context: ../..
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-      - redis
-    environment:
-      POSTGRES_HOSTNAME: postgresdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-      REDIS_HOSTNAME: redis
-      SPRING_PROFILES_ACTIVE: dev
-    volumes:
-      - ../..:/workspace:cached
-    
-    # Add "forwardPorts": ["8080"] to **devcontainer.json** to forward User Service locally.
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-    # Access User Service at http://localhost:8080
